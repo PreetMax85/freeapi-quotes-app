@@ -98,9 +98,9 @@ function createQuoteCard(quote, isQotd = false) {
     const copyBtn = clone.querySelector('.copy-button');
 
     if (isQotd) {
-        card.classList.add('bg-stone-50', 'border-stone-400'); // Subtle highlight for QOTD
-        card.classList.remove('bg-white', 'border-l-[#222]');
-        textEl.classList.add('md:text-3xl'); // Larger for QOTD
+        card.classList.add('bg-slate-50', 'border-slate-100');
+        card.classList.remove('bg-white');
+        textEl.classList.add('md:text-4xl', 'font-semibold'); 
     }
 
     textEl.textContent = quote.content;
@@ -109,7 +109,7 @@ function createQuoteCard(quote, isQotd = false) {
     if (Array.isArray(quote.tags)) {
         quote.tags.forEach(tag => {
             const span = document.createElement('span');
-            span.className = 'text-[10px] px-2 py-0.5 bg-gray-100 text-gray-500 font-medium uppercase tracking-wider';
+            span.className = 'text-[9px] px-3 py-1 bg-gray-50 text-gray-400 font-bold uppercase tracking-widest rounded-full border border-gray-100';
             span.textContent = tag;
             tagsContainer.appendChild(span);
         });
@@ -122,11 +122,11 @@ function createQuoteCard(quote, isQotd = false) {
             
             const originalText = copyBtn.textContent;
             copyBtn.textContent = 'Copied!';
-            copyBtn.classList.add('text-black', 'border-black');
+            copyBtn.classList.add('text-green-600', 'border-green-200', 'bg-green-50', 'opacity-100');
             
             setTimeout(() => {
                 copyBtn.textContent = originalText;
-                copyBtn.classList.remove('text-black', 'border-black');
+                copyBtn.classList.remove('text-green-600', 'border-green-200', 'bg-green-50', 'opacity-100');
             }, 2000);
         } catch (err) {
             console.error('Failed to copy: ', err);
