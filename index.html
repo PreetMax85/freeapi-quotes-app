@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quotes - Editorial Feed</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap');
+        
+        body {
+            background-color: #fafaf8;
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            color: #222;
+        }
+
+        .quote-text {
+            font-family: Georgia, 'Times New Roman', serif;
+        }
+
+        .quote-card {
+            background-color: white;
+            border-left: 4px solid #222;
+            transition: transform 0.2s ease-in-out;
+        }
+
+        .skeleton {
+            background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+            background-size: 200% 100%;
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse {
+            0% { background-position: 200% 0; }
+            100% { background-position: -200% 0; }
+        }
+
+        .copy-button {
+            border: 1px solid #e5e7eb;
+            background: transparent;
+        }
+        
+        .copy-button:hover {
+            background-color: #f9fafb;
+        }
+
+        /* Hide scrollbar but keep functionality */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+</head>
+<body class="min-h-screen py-12 px-4">
+    <div class="max-w-[680px] mx-auto">
+        <!-- Header & Search -->
+        <header class="mb-12">
+            <h1 class="text-3xl font-bold mb-6 tracking-tight">Quotes</h1>
+            <div class="relative">
+                <input 
+                    type="text" 
+                    id="search-input" 
+                    placeholder="Search by author or content..." 
+                    class="w-full px-4 py-3 bg-white border border-gray-200 focus:outline-none focus:ring-1 focus:ring-black transition-all"
+                >
+            </div>
+        </header>
+
+        <!-- Quote of the Day -->
+        <section id="qotd-container" class="mb-12 hidden">
+            <h2 class="text-xs uppercase tracking-widest text-gray-500 font-semibold mb-4">Quote of the Day</h2>
+            <div id="qotd-content">
+                <!-- Injected by app.js -->
+            </div>
+        </section>
+
+        <!-- Quotes Feed -->
+        <main>
+            <div id="quotes-list" class="space-y-8">
+                <!-- Quotes or Skeletons injected here -->
+            </div>
+
+            <!-- Error State -->
+            <div id="error-container" class="hidden mt-12 text-center">
+                <p class="text-red-500 mb-4">Failed to load quotes. Please try again.</p>
+                <button id="retry-button" class="px-6 py-2 border border-black hover:bg-black hover:text-white transition-all">
+                    Retry
+                </button>
+            </div>
+
+            <!-- Load More -->
+            <div id="load-more-container" class="mt-12 text-center hidden">
+                <button id="load-more-button" class="px-8 py-3 bg-black text-white hover:bg-gray-800 transition-all font-medium">
+                    Load More
+                </button>
+            </div>
+        </main>
+
+        <footer class="mt-24 pt-8 border-t border-gray-100 text-center text-gray-400 text-sm">
+            <p>Data from FreeAPI • Built with editorial intent</p>
+        </footer>
+    </div>
+
+    <!-- Templates -->
+    <template id="quote-template">
+        <div class="quote-card p-8 relative group">
+            <button class="copy-button absolute top-4 right-4 text-[10px] px-2 py-1 uppercase tracking-wider font-semibold text-gray-400 opacity-0 group-hover:opacity-100 transition-opacity">
+                Copy
+            </button>
+            <span class="absolute top-2 left-4 text-6xl text-gray-100 select-none quote-text">"</span>
+            <blockquote class="relative">
+                <p class="quote-text text-xl md:text-2xl leading-relaxed mb-4"></p>
+                <footer class="text-sm text-gray-500 font-medium">
+                    &mdash; <span class="author-name"></span>
+                </footer>
+            </blockquote>
+            <div class="tags-container mt-6 flex flex-wrap gap-2">
+                <!-- Tags injected here -->
+            </div>
+        </div>
+    </template>
+
+    <template id="skeleton-template">
+        <div class="p-8 bg-white border-l-4 border-gray-100 space-y-4">
+            <div class="skeleton h-6 w-3/4"></div>
+            <div class="skeleton h-6 w-1/2"></div>
+            <div class="skeleton h-4 w-1/4 mt-6"></div>
+            <div class="flex gap-2 mt-4">
+                <div class="skeleton h-5 w-12"></div>
+                <div class="skeleton h-5 w-16"></div>
+            </div>
+        </div>
+    </template>
+
+    <script src="app.js"></script>
+</body>
+</html>
